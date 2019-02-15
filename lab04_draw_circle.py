@@ -1,22 +1,26 @@
 import turtle
 
-def drawShape(t, n, sz):
-    """Make turtle t draw a shape with n-sides of equal lengths - sz."""
-    turn_angle=360/n
-    for i in range(n):
-        t.forward(sz)
-        t.left(turn_angle)
+def drawPolygon(t, sideLength, numSides):
+    turnAngle = 360 / numSides
+    for i in range(numSides):
+        t.forward(sideLength)
+        t.left(turnAngle)
 
-        
-def drawSquare(t, sz):
-    """Make turtle t draw a square of size sz."""
-    drawShape(t, 4, sz)
-    
-wn=turtle.Screen()
-wn.bgcolor("lightgreen")
+def drawCircle(anyTurtle, radius):
+    circumference = 2 * 3.1415 * radius
+    sideLength = circumference / 360
+    drawPolygon(anyTurtle, sideLength, 360)
 
-tess = turtle.Turtle()           
-#drawSquare(tess, 50)
-drawShape(tess, 3, 50)
+def drawFilledCircle(anyTurtle, radius, fill_color):
+    anyTurtle.fillcolor(fill_color)
+    anyTurtle.begin_fill()
+    drawCircle(anyTurtle, radius)
+    anyTurtle.end_fill()
+
+wn = turtle.Screen()
+wheel = turtle.Turtle()
+
+drawCircle(wheel, 35)
+drawFilledCircle(wheel, 50, "blue")
 
 wn.exitonclick()
